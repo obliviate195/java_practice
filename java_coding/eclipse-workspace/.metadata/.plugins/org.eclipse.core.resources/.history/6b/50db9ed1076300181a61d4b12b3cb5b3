@@ -1,0 +1,54 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+ 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+ 
+public class GrimPan{
+ 
+    static JFrame jf;
+    static JButton bt1;
+    static JButton bt2;
+    static JButton bt3;
+    static JButton bt4;
+    
+    public static void main(String[] args) {
+        jf =  new JFrame("Layout");
+        jf.setSize(300, 300);
+        jf.setLocation(700, 400);
+        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        bt1 = new JButton("Button 1");
+        jf.add("North",bt1);    
+        
+        JPanel jp = new JPanel();
+        jp.setLayout(new BoxLayout(jp,BoxLayout.Y_AXIS));
+        
+        
+        bt2 = new JButton("Button 2");
+        bt3 = new JButton("Button 3");
+        bt4 = new JButton("Button 4");
+        JPanel jp1 = new JPanel();
+        jp1.setLayout(new BorderLayout());
+        JPanel jp2 = new JPanel();
+        jp2.setLayout(new BorderLayout());
+        JPanel jp1_1 = new JPanel();
+        jp1_1.setLayout(new BorderLayout());
+        jp1_1.setBackground(Color.white);
+        jp1.add("East", bt4);
+        jp2.add("West",bt2);
+        jp1_1.add("South",jp1);
+        //jp1_1.add("Center",bt3);
+        jp1_1.add("North",jp2);
+        
+        jp.add(jp1_1);
+        
+        jf.add("Center",jp);
+        jf.setVisible(true);
+        
+    
+    }
+}
+

@@ -1,0 +1,100 @@
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+import javax.swing.event.*;
+
+
+public class MyFrame extends JFrame {
+	private FigButtonPanel fbp=new FigButtonPanel();
+	private ColorButtonPanel fbp2=new ColorButtonPanel();
+	private PaintPanel pp=new PaintPanel();
+	private JPanel board=new JPanel();
+	public MyFrame() {
+        add("North",fbp);    
+        
+        JPanel jp = new JPanel();
+        jp.setLayout(new BoxLayout(jp,BoxLayout.Y_AXIS));
+        
+        
+        JButton bt2 = new JButton("Button 2");
+        JButton bt3 = new JButton("Button 3");
+        JButton bt4 = new JButton("Button 4");
+        JPanel jp1 = new JPanel();
+        jp1.setLayout(new BorderLayout());
+        JPanel jp2 = new JPanel();
+        jp2.setLayout(new BorderLayout());
+        JPanel jp1_1 = new JPanel();
+        jp1_1.setLayout(new BorderLayout());
+        jp1_1.setBackground(Color.white);
+        //jp1.add("East", bt4);
+        jp1.setBackground(Color.red);
+        jp2.add("West",bt2);
+        jp2.setBackground(Color.blue);
+        jp1_1.add("South",jp1);
+        //jp1_1.add("Center",bt3);
+        jp1_1.add("North",jp2);
+        
+        jp.add(jp1_1);
+        
+        add("Center",jp);
+		/*add("North",fbp);
+		board.setLayout(new BoxLayout(board, BoxLayout.Y_AXIS));
+		pp.setLayout(new BorderLayout());
+		fbp2.setLayout(new BorderLayout());
+		JPanel np=new JPanel();
+		np.setLayout(new BorderLayout());
+		np.add("North",fbp2);
+		np.add("South",pp);
+		board.add("Center",np);
+		add("Center",board);
+		/*JPanel centerpanel=new JPanel();
+		centerpanel.setLayout(new BorderLayout(10, 10));
+		centerpanel.add("North",fbp);
+		centerpanel.add(pp);
+		add(centerpanel);*/
+		
+	}
+}
+
+class FigButtonPanel extends JPanel{
+	private JButton[] btns=new JButton[5];
+	public FigButtonPanel() {
+		setLayout(new FlowLayout());
+		btns[0]=new JButton("EmptyRect");
+		btns[1]=new JButton("EmptyOval");
+		btns[2]=new JButton("FilledRect");
+		btns[3]=new JButton("FilledOval");
+		btns[4]=new JButton("Line");
+		//btns[0].setPreferredSize(new Dimension(100,30));
+		add(btns[0]);
+		//btns[1].setPreferredSize(new Dimension(100,30));
+		add(btns[1]);
+		add(btns[2]);
+		add(btns[3]);
+		add(btns[4]);
+		setBackground(Color.white);
+	}
+	
+}
+
+class ColorButtonPanel extends JPanel{
+	private JButton[] btns=new JButton[5];
+	public ColorButtonPanel() {
+		setLayout(new FlowLayout());
+		btns[0]=new JButton("Black");
+		btns[1]=new JButton("Red");
+		btns[2]=new JButton("Blue");
+		btns[3]=new JButton("Green");
+		btns[4]=new JButton("Yellow");
+		for(int i=0;i<5;i++) {
+			add(btns[i]);
+		}
+		setBackground(Color.white);
+	}
+}
+class PaintPanel extends JPanel{
+	public PaintPanel() {
+		setBackground(Color.red);
+		//setSize(300,300);
+	}
+}

@@ -1,0 +1,247 @@
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JColorChooser;
+
+public class PaintFrame extends JFrame 
+{
+	private PaintPanel paintPanel;
+	private int shape = 0, thickness = 2;
+	private Color color = Color.BLACK;
+	
+	public PaintFrame()
+	{
+		super("Painting");
+		setLayout(new FlowLayout());
+		JMenuBar bar = new JMenuBar();
+		setJMenuBar(bar);
+		
+		JMenu fileMenu = new JMenu("File");
+		fileMenu.setMnemonic('F');
+		bar.add(fileMenu);
+
+		Icon save = new ImageIcon("C:\\Users\\딸기토끼\\Desktop\\새 폴더\\2-1\\자바\\자바 이미지\\save.gif");
+		Icon open = new ImageIcon("C:\\Users\\딸기토끼\\Desktop\\새 폴더\\2-1\\자바\\자바 이미지\\open.gif");
+		
+		JMenuItem saveItem = new JMenuItem("Save", save);
+		saveItem.setMnemonic('S');
+		fileMenu.add(saveItem);
+		JMenuItem loadItem = new JMenuItem("Load", open);
+		loadItem.setMnemonic('L');
+		fileMenu.add(loadItem);
+		
+		JMenu Shape = new JMenu("Shape");
+		Shape.setMnemonic('h');
+		bar.add(Shape);
+		
+		Icon rect = new ImageIcon("C:\\Users\\딸기토끼\\Desktop\\새 폴더\\2-1\\자바\\자바 이미지\\rect.gif");
+	    Icon oval = new ImageIcon("C:\\Users\\딸기토끼\\Desktop\\새 폴더\\2-1\\자바\\자바 이미지\\oval.gif");
+	    Icon line = new ImageIcon("C:\\Users\\딸기토끼\\Desktop\\새 폴더\\2-1\\자바\\자바 이미지\\line.gif");
+	    Icon fr = new ImageIcon("C:\\Users\\딸기토끼\\Desktop\\새 폴더\\2-1\\자바\\자바 이미지\\FR.gif");
+	    Icon fo = new ImageIcon("C:\\Users\\딸기토끼\\Desktop\\새 폴더\\2-1\\자바\\자바 이미지\\FO.gif");
+		
+		JMenuItem Rect = new JMenuItem("Rect", rect);
+		Rect.setMnemonic('R');
+		Shape.add(Rect);
+		JMenuItem Oval = new JMenuItem("Oval", oval);
+		Oval.setMnemonic('O');
+		Shape.add(Oval);
+		JMenuItem Line = new JMenuItem("Line", line);
+		Line.setMnemonic('L');
+		Shape.add(Line);
+		JMenuItem FR = new JMenuItem("FR", fr);
+		Shape.add(FR);
+		JMenuItem FO = new JMenuItem("FO", fo);
+		Shape.add(FO);
+
+		Icon colors = new ImageIcon("C:\\Users\\딸기토끼\\Desktop\\새 폴더\\2-1\\자바\\자바 이미지\\colors.gif");
+		JButton Color = new JButton("Color", colors);
+		
+		Icon move = new ImageIcon("C:\\Users\\딸기토끼\\Desktop\\새 폴더\\2-1\\자바\\자바 이미지\\move.gif");
+		Icon fill = new ImageIcon("C:\\Users\\딸기토끼\\Desktop\\새 폴더\\2-1\\자바\\자바 이미지\\fill.gif");
+		Icon border = new ImageIcon("C:\\Users\\딸기토끼\\Desktop\\새 폴더\\2-1\\자바\\자바 이미지\\border.gif");
+		Icon changesize = new ImageIcon("C:\\Users\\딸기토끼\\Desktop\\새 폴더\\2-1\\자바\\자바 이미지\\changesize.gif");
+		
+		JMenu Functions = new JMenu("Functions");
+		bar.add(Functions);
+
+		JMenuItem filler = new JMenuItem("Fill", fill);
+		Functions.add(filler);
+		JMenuItem changeSize = new JMenuItem("Change Size", changesize);
+		Functions.add(changeSize);
+		JMenuItem changeLocation = new JMenuItem("Change Location", move);
+		Functions.add(changeLocation);
+		JMenuItem changeBorder = new JMenuItem("Change Border's Color", border);
+		Functions.add(changeBorder);
+		    
+		Icon back = new ImageIcon("C:\\Users\\딸기토끼\\Desktop\\새 폴더\\2-1\\자바\\자바 이미지\\undo.gif");
+	    Icon forward = new ImageIcon("C:\\Users\\딸기토끼\\Desktop\\새 폴더\\2-1\\자바\\자바 이미지\\redo.gif");
+	    Icon eraser = new ImageIcon("C:\\Users\\딸기토끼\\Desktop\\새 폴더\\2-1\\자바\\자바 이미지\\eraser.gif");
+	    Icon pen = new ImageIcon("C:\\Users\\딸기토끼\\Desktop\\새 폴더\\2-1\\자바\\자바 이미지\\pen.png");
+		
+	    JButton Undo = new JButton("Undo", back);
+	    JButton Redo = new JButton("Redo", forward);
+	    
+	    JButton Eraser = new JButton("Eraser", eraser);
+		JButton Pen = new JButton("Pen", pen);
+		
+		JMenu Thickness = new JMenu("Thickness");
+	    bar.add(Thickness);
+	    
+	    Icon a = new ImageIcon("C:\\Users\\딸기토끼\\Desktop\\새 폴더\\2-1\\자바\\자바 이미지\\a.png");
+	    Icon b = new ImageIcon("C:\\Users\\딸기토끼\\Desktop\\새 폴더\\2-1\\자바\\자바 이미지\\b.png");
+	    Icon c = new ImageIcon("C:\\Users\\딸기토끼\\Desktop\\새 폴더\\2-1\\자바\\자바 이미지\\c.png");
+	    Icon d = new ImageIcon("C:\\Users\\딸기토끼\\Desktop\\새 폴더\\2-1\\자바\\자바 이미지\\d.png");
+	    
+	    JMenuItem thick1 = new JMenuItem("1", a);
+		Thickness.add(thick1);
+		JMenuItem thick2 = new JMenuItem("2", b);
+		Thickness.add(thick2);
+		JMenuItem thick3 = new JMenuItem("3", c);
+		Thickness.add(thick3);
+		JMenuItem thick4 = new JMenuItem("4", d);
+		Thickness.add(thick4);
+		
+		paintPanel = new PaintPanel();
+		add(Color);
+		add(Undo);
+		add(Redo);
+		add(Eraser);
+		add(Pen);
+		add(paintPanel);
+		ButtonHandler handler = new ButtonHandler();
+		Undo.addActionListener(handler);
+		Redo.addActionListener(handler);
+		Eraser.addActionListener(handler);
+		Pen.addActionListener(handler);
+		saveItem.addActionListener(handler);
+		thick1.addActionListener(handler);
+		thick2.addActionListener(handler);
+		thick3.addActionListener(handler);
+		thick4.addActionListener(handler);
+		Rect.addActionListener(handler);
+		Oval.addActionListener(handler);
+		Line.addActionListener(handler);
+		FR.addActionListener(handler);
+		FO.addActionListener(handler);
+		Color.addActionListener(handler);
+		filler.addActionListener(handler);
+		changeSize.addActionListener(handler);
+		changeLocation.addActionListener(handler);
+		changeBorder.addActionListener(handler);
+		paintPanel.setPreferredSize(new Dimension(1000, 700));		
+	}
+	
+	private class ButtonHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent event)
+		{
+			if(event.getActionCommand() == "Undo")
+			{
+				paintPanel.undo();
+			}
+			else if(event.getActionCommand() == "Redo")
+			{
+				paintPanel.redo();
+			}
+			else if(event.getActionCommand() == "Eraser")
+			{
+				paintPanel.erase();
+			}
+			else if(event.getActionCommand() == "Pen")
+			{
+				paintPanel.pen();
+			}
+			else if(event.getActionCommand() == "1")
+			{
+				thickness = 2;
+			}
+			else if(event.getActionCommand() == "2")
+			{
+				thickness = 4;
+			}
+			else if(event.getActionCommand() == "3")
+			{
+				thickness = 8;
+			}
+			else if(event.getActionCommand() == "4")
+			{
+				thickness = 16;
+			}
+			else if(event.getActionCommand() == "Rect")
+			{
+				shape = 0;
+				paintPanel.shape();
+			}
+			else if(event.getActionCommand() == "Oval")
+			{
+				shape = 1;
+				paintPanel.shape();
+			}
+			else if(event.getActionCommand() == "Line")
+			{
+				shape = 2;
+				paintPanel.shape();
+			}
+			else if(event.getActionCommand() == "FR")
+			{
+				shape = 3;
+				paintPanel.shape();
+			}
+			else if(event.getActionCommand() == "FO")
+			{
+				shape = 4;
+				paintPanel.shape();
+			}
+			else if(event.getActionCommand() == "Color")
+			{
+				color = JColorChooser.showDialog(null, "Choose a Color", color);
+			    if (color != null)
+			    	paintPanel.setColor(color);
+			}
+			else if(event.getActionCommand() == "Fill")
+			{
+				color = JColorChooser.showDialog(null, "Choose a Color", color);
+				if (color != null)
+			    	paintPanel.ChangeFill(color);
+			}
+			else if(event.getActionCommand() == "Change Size")
+			{
+				paintPanel.ChangeSize();
+			}
+			else if(event.getActionCommand() == "Change Location")
+			{
+				paintPanel.ChangeLocation();
+			}
+			else if(event.getActionCommand() == "Change Border's Color")
+			{
+				color = JColorChooser.showDialog(null, "Choose a Color", color);
+				if (color != null)
+			    	paintPanel.ChangeBorder(color);
+			}
+			else if(event.getActionCommand()=="Save")
+			{
+				try {
+					paintPanel.save();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			paintPanel.drawShape(shape, thickness);
+		}
+	}
+}
